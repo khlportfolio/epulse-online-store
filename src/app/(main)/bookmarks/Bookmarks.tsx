@@ -27,7 +27,7 @@ const Bookmarks = () => {
     if (status === "success" && !products.length && !hasNextPage) {
         return (
             <p className="text-center text-muted-foreground">
-                You don't have any bookmarks yet.
+                You don&apos;t have any bookmarks yet.
             </p>
         )
     }
