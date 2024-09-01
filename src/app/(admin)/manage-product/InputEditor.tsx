@@ -39,6 +39,7 @@ interface SizeStockInput {
 
 const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
     const mutation = useSubmitProductMutation(categoryId);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [categories, setCategories] = useState<CategoryProps[]>([]);
     const [sizes, setSizes] = useState<SizeProps[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<string | undefined>(undefined);
@@ -203,22 +204,23 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
         });
 
         if (!validationResult.success) {
-            const errors = validationResult.error.format();
+            const zodErrors = validationResult.error.errors;
             const formattedErrors: { [key: string]: string } = {};
 
-            for (const [field, error] of Object.entries(errors)) {
-                if (typeof error === "object" && "message" in error) {
-                    formattedErrors[field] = error.message as string;
-                }
-            }
+            zodErrors.forEach((error) => {
+                formattedErrors[error.path[0]] = error.message;
+            });
 
             setErrors(formattedErrors);
             return;
         }
 
         if (!selectedCategory) {
+            setErrors(prevErrors => ({ ...prevErrors, categoryId: 'Category is required' }));
             return;
         }
+
+        setIsSubmitting(true);
 
         mutation.mutate({ title, price: isPriceValid ? price : 0, categoryId: selectedCategory, features: features.split('\n').filter(Boolean), materials: materials.split('\n').filter(Boolean), summary, detailsSize: detailsSize.split('\n').filter(Boolean), sizeStocks, mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[] }, {
             onSuccess: () => {
@@ -230,9 +232,15 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                 detailsSizeEditor?.commands.clearContent();
                 resetMediaUpload();
                 onSubmitSuccess();
-            }
+                setIsSubmitting(false);
+            },
+            onError: () => {
+                setIsSubmitting(false); // Stop loading when there's an error
+            },
         })
     }
+
+    console.log(errors)
 
     return (
         <div className="flex flex-col gap-6 rounded-3xl bg-card p-6 shadow-md">
@@ -339,7 +347,7 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                     onFilesSelected={startUpload}
                     disabled={isUploading || attachments.length >= 5}
                 />
-                <LoadingButton onClick={onSubmit} loading={mutation.isPending} disabled={!title.trim() || isUploading} className="min-w-20">Submit</LoadingButton>
+                <LoadingButton onClick={onSubmit} loading={mutation.isPending} className="min-w-20">Submit</LoadingButton>
                 {/* <LoadingButton onClick={() => { }} loading={true} disabled={false} className="min-w-20">Submit</LoadingButton> */}
             </div>
         </div>
