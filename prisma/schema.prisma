@@ -1,0 +1,140 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id          String   @id
+  username    String   @unique
+  displayName String
+  email       String?  @unique
+  passwordHash String?
+  avatarUrl   String?
+  sessions    Session[]
+  bookmarks   Bookmark[]
+  cartItems   CartItem[]
+  
+
+  createdAt   DateTime @default(now())
+  @@map("users")
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  expiresAt DateTime
+  user      User     @relation(references: [id], fields: [userId], onDelete: Cascade)
+  @@map("sessions")
+}
+
+model AboutUs {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@map("about_us")
+}
+
+model Product {
+  id              String      @id @default(cuid())
+  title           String
+  price           Int
+  category        Category     @relation(fields: [categoryId], references: [id])
+  categoryId      String
+  features        String[]         // Menyimpan array string untuk features
+  materials       String[]         // Menyimpan array string untuk materials
+  summary         String
+  detailsSize     String[]         // Menyimpan array string untuk detailsSize
+  sold            Int @default(0)
+  sizeStocks      SizeStock[]
+  attachments     Media[]
+  bookmarks       Bookmark[]
+  cartItems       CartItem[]
+
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@map("products")
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  products    Product[]
+
+  @@map("categories")
+}
+
+model Size {
+  id          String     @id @default(cuid())
+  name        String     // Ukuran seperti S, M, L, XL
+  cartItems   CartItem[]
+  sizeStocks  SizeStock[]
+
+  @@map("sizes")
+}
+
+model Media {
+  id  String @id @default(cuid())
+  productId String?
+  product Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  type MediaType
+  url String
+
+  createdAt DateTime @default(now())
+
+  @@map("product_media")
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+model Bookmark {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+  @@map("bookmarks")
+}
+
+
+model CartItem {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  sizeId    String
+  quantity  Int      @default(1)
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  size      Size     @relation(fields: [sizeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@map("cart_items")
+}
+
+model SizeStock {
+  id          String     @id @default(cuid())
+  stock       Int        // Jumlah stok untuk ukuran tertentu
+  productId   String     // Relasi ke produk
+  sizeId      String     // Relasi ke ukuran
+  product     Product    @relation(fields: [productId], references: [id])
+  size        Size       @relation(fields: [sizeId], references: [id])
+
+  @@map("size_stocks")
+}
