@@ -26,6 +26,10 @@ const AddToBagClient: React.FC<AddToBagClientProps> = ({ productId, sizes, initi
     const [quantity, setQuantity] = useState<number>(1);
     const [loading, setLoading] = useState<boolean>(false);
 
+    // Mendapatkan stok untuk ukuran yang dipilih
+    const selectedSize = sizes.find(size => size.id === selectedSizeId);
+    const isSizeInStock = selectedSize ? selectedSize.stock > 0 : false;
+
     const handleSizeSelect = (sizeId: string) => {
         setSelectedSizeId(sizeId);
     };
@@ -38,10 +42,10 @@ const AddToBagClient: React.FC<AddToBagClientProps> = ({ productId, sizes, initi
     };
 
     const handleAddToBag = async () => {
-        if (!userId || !selectedSizeId) {
+        if (!userId || !selectedSizeId || !isSizeInStock) {
             toast({
                 variant: "destructive",
-                description: "Please select a size and ensure you are logged in."
+                description: "Please select a valid size and ensure you are logged in."
             });
             return;
         }
@@ -110,7 +114,10 @@ const AddToBagClient: React.FC<AddToBagClientProps> = ({ productId, sizes, initi
                 </div>
             </div>
             <div className="flex flex-wrap gap-4 max-sm:justify-center">
-                <AddToBagButton onClick={handleAddToBag} disabled={loading}>
+                <AddToBagButton
+                    onClick={handleAddToBag}
+                    disabled={loading || !userId || !selectedSizeId || !isSizeInStock}
+                >
                     {loading ? 'Adding...' : 'ADD TO BAG'}
                 </AddToBagButton>
                 <BookmarkButton
