@@ -62,6 +62,7 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                 const response = await fetch('/api/size/all');
                 const data = await response.json();
                 setSizes(data);
+                setSizeStocks(data.map((size: SizeProps) => ({ sizeId: size.id, stock: 0 })));
             } catch (error) {
                 console.error('Error fetching sizes:', error);
             } finally {
@@ -323,6 +324,7 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                             <input
                                 type="number"
                                 placeholder="Stock"
+                                value={sizeStocks.find((s) => s.sizeId === size.id)?.stock || 0}
                                 onChange={(e) => handleSizeStockChange(size.id, parseInt(e.target.value, 10))}
                                 className="flex-1 p-2 border border-muted-foreground rounded-lg"
                                 min={0}
@@ -353,6 +355,7 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
             </div>
             <div className="flex justify-start text-xs text-red-500">
                 <div className="flex flex-col gap-2">
+                    <p className="italic">- Ukuran maksimal setiap gambar 16MB</p>
                     <p className="italic">- hanya bisa memasukkan gambar dengan jumlah 1 - 5</p>
                     <p className="italic">- Gambar utama adalah gambar yang diupload di pertama kali</p>
                     <p className="italic">- Tidak bisa memasukkan gambar lebih dari 5</p>

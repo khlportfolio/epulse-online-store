@@ -71,7 +71,7 @@ const NavLink = () => {
 
     return (
         <div className="max-w-7xl mx-auto px-5 py-3">
-            <div className="hidden md:flex items-center justify-center py-5 gap-8">
+            <div className="hidden md:flex md:flex-wrap items-center justify-center py-5 gap-x-8 gap-y-5">
                 {data?.map((item) => (
                     <Link key={item.id} href={`/${item.id}`} className="text-muted-foreground hover:text-primary transition-colors text-sm md:text-base truncate max-w-xs md:max-w-sm"
                         title={item.name}>
