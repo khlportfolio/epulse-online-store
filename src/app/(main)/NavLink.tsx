@@ -73,7 +73,8 @@ const NavLink = () => {
         <div className="max-w-7xl mx-auto px-5 py-3">
             <div className="hidden md:flex items-center justify-center py-5 gap-8">
                 {data?.map((item) => (
-                    <Link key={item.id} href={`/${item.id}`} className="text-muted-foreground hover:text-primary transition-colors">
+                    <Link key={item.id} href={`/${item.id}`} className="text-muted-foreground hover:text-primary transition-colors text-sm md:text-base truncate max-w-xs md:max-w-sm"
+                        title={item.name}>
                         {item.name}
                     </Link>
                 ))}
@@ -97,7 +98,8 @@ const NavLink = () => {
                         <div className="flex flex-col items-start gap-5">
                             {data?.map((item) => (
                                 <SheetClose asChild key={item.name}>
-                                    <Link href={`/${item.id}`} className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                                    <Link href={`/${item.id}`} className="text-sm text-muted-foreground hover:text-primary transition-colors truncate max-w-xs"
+                                        title={item.name}>
                                         {item.name}
                                     </Link>
                                 </SheetClose>

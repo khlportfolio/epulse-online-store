@@ -1,7 +1,7 @@
 import { string, z } from 'zod'
 
-const requiredString = z.string().trim().min(1, 'Required')
-const positiveInt = z.number().int().positive('Must be a positive number')
+const requiredString = z.string().trim().min(1, 'Tidak boleh kosong')
+const positiveInt = z.number().int().positive('harus angka')
 
 export const signUpSchema = z.object({
   email: requiredString.email('Invalid email address'),

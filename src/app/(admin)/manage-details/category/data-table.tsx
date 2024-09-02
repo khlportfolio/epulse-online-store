@@ -41,21 +41,19 @@ export function DataTable<TData, TValue>({
                     <TableHeader className="bg-primary text-white">
                         {table.getHeaderGroups().map((headerGroup) => (
                             <TableRow key={headerGroup.id}>
-                                {headerGroup.headers.map((header) => {
-                                    return (
-                                        <TableHead
-                                            key={header.id}
-                                            className="px-4 py-2 text-left text-sm font-semibold tracking-wider"
-                                        >
-                                            {header.isPlaceholder
-                                                ? null
-                                                : flexRender(
-                                                    header.column.columnDef.header,
-                                                    header.getContext()
-                                                )}
-                                        </TableHead>
-                                    )
-                                })}
+                                {headerGroup.headers.map((header) => (
+                                    <TableHead
+                                        key={header.id}
+                                        className="px-4 py-2 text-left text-sm font-semibold tracking-wider"
+                                    >
+                                        {header.isPlaceholder
+                                            ? null
+                                            : flexRender(
+                                                header.column.columnDef.header,
+                                                header.getContext()
+                                            )}
+                                    </TableHead>
+                                ))}
                             </TableRow>
                         ))}
                     </TableHeader>
@@ -71,7 +69,8 @@ export function DataTable<TData, TValue>({
                                     {row.getVisibleCells().map((cell) => (
                                         <TableCell
                                             key={cell.id}
-                                            className="px-4 py-2 text-sm text-foreground"
+                                            className="px-4 py-2 text-sm text-foreground max-w-xs whitespace-nowrap overflow-hidden text-ellipsis"
+                                            style={{ maxWidth: '8ch' }} // Limit width to accommodate 8 characters
                                         >
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>

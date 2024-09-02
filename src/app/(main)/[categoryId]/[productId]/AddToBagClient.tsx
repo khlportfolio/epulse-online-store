@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddToBagButton from "@/components/AddToBagButton";
 import BookmarkButton from "@/components/BookmarkButton";
 import SizeButton from "@/components/SizeButton";
@@ -30,13 +30,21 @@ const AddToBagClient: React.FC<AddToBagClientProps> = ({ productId, sizes, initi
     const selectedSize = sizes.find(size => size.id === selectedSizeId);
     const isSizeInStock = selectedSize ? selectedSize.stock > 0 : false;
 
+    const maxQuantity = selectedSize?.stock || 1;
+
+    useEffect(() => {
+        if (quantity > maxQuantity) {
+            setQuantity(maxQuantity);
+        }
+    }, [selectedSizeId, maxQuantity]);
+
     const handleSizeSelect = (sizeId: string) => {
         setSelectedSizeId(sizeId);
     };
 
     const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(e.target.value, 10);
-        if (!isNaN(value) && value > 0) {
+        if (!isNaN(value) && value > 0 && value <= maxQuantity) {
             setQuantity(value);
         }
     };
@@ -110,6 +118,7 @@ const AddToBagClient: React.FC<AddToBagClientProps> = ({ productId, sizes, initi
                         value={quantity}
                         onChange={handleQuantityChange}
                         className="mt-2 px-3 py-2 border rounded-md bg-background text-primary"
+                        max={maxQuantity}
                     />
                 </div>
             </div>

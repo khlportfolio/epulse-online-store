@@ -10,13 +10,16 @@ export async function GET(req: NextRequest) {
 
     const categoryContents = await prisma.category.findMany({
       cursor: cursor ? { id: cursor } : undefined,
+      orderBy: {
+        createdAt: 'desc',
+      },
     })
 
     const nextCursor =
       categoryContents.length > pageSize ? categoryContents[pageSize].id : null
 
     const data: CategoryContentsPage = {
-      categoryContens: categoryContents.slice(0, pageSize),
+      categoryContens: categoryContents,
       nextCursor,
     }
 

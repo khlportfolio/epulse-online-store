@@ -19,7 +19,7 @@ export async function GET(req: NextRequest) {
       productContents.length > pageSize ? productContents[pageSize].id : null
 
     const data: ProductContentsPage = {
-      productContents: productContents.slice(0, pageSize),
+      productContents: productContents,
       nextCursor,
     }
 

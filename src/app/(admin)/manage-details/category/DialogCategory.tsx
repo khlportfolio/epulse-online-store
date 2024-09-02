@@ -22,11 +22,11 @@ const DialogCategory = () => {
             <DialogTrigger asChild>
                 <Button className='bg-primary text-white hover:bg-primary-dark'>Add Category</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md max-w-full">
                 <DialogHeader>
                     <DialogTitle>Category</DialogTitle>
                     <DialogDescription>
-                        You can adding your category here.
+                        You can add your category here.
                     </DialogDescription>
                 </DialogHeader>
                 <InputEditor onSubmitSuccess={handleCloseDialog} />

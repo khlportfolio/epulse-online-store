@@ -73,6 +73,9 @@ const Sidebar = () => {
         <aside className="sticky top-0 bg-gray-200 text-primary w-64 p-4 min-h-screen flex flex-col shadow-lg">
             <nav className="flex-grow">
                 <ul className="space-y-4">
+                    <Link href="/admin" className={`flex items-center gap-3 p-3 rounded-md transition-all duration-300 font-semibold`}>
+                        Home Dashboard
+                    </Link>
                     {data?.map((item) => (
                         <li key={item.id}>
                             <Link

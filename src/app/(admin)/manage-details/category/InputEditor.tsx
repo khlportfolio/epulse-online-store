@@ -42,13 +42,15 @@ const InputEditor = ({ onSubmitSuccess }: InputEditorProps) => {
     }
 
     return (
-        <div className="flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm">
+        <div className="flex flex-col gap-5 rounded-2xl bg-card p-5 shadow-sm overflow-x-auto">
             <div>
                 <h2 className="text-base mb-2">Name</h2>
-                <EditorContent
-                    editor={nameEditor}
-                    className="w-full max-h-[10rem] overflow-y-auto bg-background rounded-2xl px-5 py-2 border border-muted-foreground"
-                />
+                <div className="relative">
+                    <EditorContent
+                        editor={nameEditor}
+                        className="w-full max-w-full max-h-[10rem] overflow-x-auto bg-background rounded-2xl px-5 py-2 border border-muted-foreground"
+                    />
+                </div>
             </div>
             <div className="flex justify-end">
                 <LoadingButton onClick={onSubmit} loading={mutation.isPending} disabled={!name.trim()} className="min-w-20">Submit</LoadingButton>

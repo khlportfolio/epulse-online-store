@@ -325,6 +325,7 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                                 placeholder="Stock"
                                 onChange={(e) => handleSizeStockChange(size.id, parseInt(e.target.value, 10))}
                                 className="flex-1 p-2 border border-muted-foreground rounded-lg"
+                                min={0}
                             />
                         </div>
                     ))
@@ -349,6 +350,15 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                 />
                 <LoadingButton onClick={onSubmit} loading={mutation.isPending} className="min-w-20">Submit</LoadingButton>
                 {/* <LoadingButton onClick={() => { }} loading={true} disabled={false} className="min-w-20">Submit</LoadingButton> */}
+            </div>
+            <div className="flex justify-start text-xs text-red-500">
+                <div className="flex flex-col gap-2">
+                    <p className="italic">- hanya bisa memasukkan gambar dengan jumlah 1 - 5</p>
+                    <p className="italic">- Gambar utama adalah gambar yang diupload di pertama kali</p>
+                    <p className="italic">- Tidak bisa memasukkan gambar lebih dari 5</p>
+                    <p className="italic">- Summary berbentuk paragraf</p>
+                    <p className="italic">- Features, material, dan size details berbentuk list. Untuk cara input data nya setiap list diberi pemisah enter</p>
+                </div>
             </div>
         </div>
     );
