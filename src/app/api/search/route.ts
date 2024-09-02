@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
     const nextCursor = products.length > pageSize ? products[pageSize].id : null
 
     const data: ProductContentsPage = {
-      productContents: products.slice(0, pageSize),
+      productContents: products,
       nextCursor,
     }
 
