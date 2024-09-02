@@ -1,11 +1,11 @@
 import LoadingButton from "@/components/LoadingButton";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { CategoryData } from "@/lib/types";
+import { CategoryData, SizeData } from "@/lib/types";
 import { useDeleteSizeMutation } from "./mutations"
 
 interface DeleteSizeDialogProps {
-    sizeContent: CategoryData,
+    sizeContent: SizeData,
     open: boolean,
     onClose: () => void
 }
