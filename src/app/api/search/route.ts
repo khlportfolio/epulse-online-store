@@ -12,12 +12,6 @@ export async function GET(req: NextRequest) {
 
     const pageSize = 5
 
-    const { user } = await validateRequest()
-
-    if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
     const products = await prisma.product.findMany({
       where: {
         OR: [
