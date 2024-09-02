@@ -3,7 +3,7 @@ import DataFetching from "./DataFetching";
 
 const AboutUsPage = () => {
     return (
-        <div className="p-2">
+        <div className="w-full">
             <div className="flex items-center justify-between mb-6">
                 <h1 className="text-2xl font-semibold text-primary">Edit About Us Page</h1>
                 <DialogAbout />

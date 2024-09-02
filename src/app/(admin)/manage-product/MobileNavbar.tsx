@@ -81,6 +81,9 @@ const MobileNavbar = () => {
                     </SheetDescription>
                 </SheetHeader>
                 <nav className="flex flex-col items-center space-y-2 mt-4">
+                    <Link href="/admin" className={`flex items-center gap-3 p-3 rounded-md transition-all duration-300 font-semibold`}>
+                        Home Dashboard
+                    </Link>
                     {categories?.map((item) => (
                         <Link key={item.id} href={`/manage-product/${item.id}`} className={`flex items-center justify-center p-2 transition-all duration-300 rounded-md ${pathname === `/manage-product/${item.id}`
                             ? 'bg-primary text-white shadow-md'

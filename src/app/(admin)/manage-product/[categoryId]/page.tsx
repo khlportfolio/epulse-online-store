@@ -7,12 +7,14 @@ interface PageProps {
 
 const Page = ({ params: { categoryId } }: PageProps) => {
     return (
-        <div className="p-2">
-            <div className="flex items-center justify-between mb-6">
-                <h1 className="text-2xl font-semibold text-primary">Edit Product For Your Store</h1>
-                <DialogProduct categoryId={categoryId} />
+        <div className="w-full">
+            <div className="flex flex-row items-center justify-between w-full ">
+                <h1 className="text-xl md:text-2xl font-semibold text-primary">Edit Product For Your Store</h1>
+                <div className="mt-4 md:mt-0">
+                    <DialogProduct categoryId={categoryId} />
+                </div>
             </div>
-            <div className="container mx-auto py-10">
+            <div className="w-full py-6 md:py-10 ">
                 <DataFetching categoryId={categoryId} />
             </div>
         </div>

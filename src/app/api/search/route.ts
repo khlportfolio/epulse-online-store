@@ -26,6 +26,13 @@ export async function GET(req: NextRequest) {
               search: searchQuery,
             },
           },
+          {
+            category: {
+              name: {
+                search: searchQuery,
+              },
+            },
+          },
         ],
       },
       include: getProductDataInclude(),
