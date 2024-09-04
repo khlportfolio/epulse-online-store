@@ -15,8 +15,8 @@ const lato = Lato({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Epulse",
-    default: "Epulse"
+    template: "%s | Epuise",
+    default: "Epuise"
   },
   description: "An online store for buying outfit",
 };

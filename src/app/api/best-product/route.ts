@@ -12,9 +12,10 @@ export async function GET(req: NextRequest) {
       take: pageSize + 1,
       cursor: cursor ? { id: cursor } : undefined,
       include: getProductDataInclude(),
-      orderBy: {
-        sold: 'desc', // Mengurutkan berdasarkan sold terbanyak
-      },
+      orderBy: [
+        { isBestProduct: 'desc' }, // Prioritas pertama: Produk yang memiliki isBestProduct: true
+        { sold: 'desc' }, // Prioritas kedua: Produk dengan penjualan terbanyak
+      ],
     })
 
     const nextCursor =

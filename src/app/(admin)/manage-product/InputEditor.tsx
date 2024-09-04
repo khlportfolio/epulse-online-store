@@ -11,10 +11,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import useMediaUpload, { Attachment } from "./useMediaUpload";
 import { useRef } from "react"
 import { Button } from "@/components/ui/button";
-import { ImageIcon, Loader2, X } from "lucide-react";
+import { ImageIcon, Info, Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { createProductSchema } from "@/lib/validation";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface InputEditorProps {
     onSubmitSuccess: () => void;
@@ -46,6 +48,11 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
     const [sizeStocks, setSizeStocks] = useState<SizeStockInput[]>([]);
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [loadingSizes, setLoadingSizes] = useState<boolean>(true);
+    const [isBestProduct, setIsBestProduct] = useState(false);
+
+    const handleBestProductChange = (checked: boolean) => {
+        setIsBestProduct(checked);
+    };
 
     const { startUpload, attachments, isUploading, uploadProgress, removeAttachment, reset: resetMediaUpload } = useMediaUpload();
 
@@ -202,6 +209,7 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
             detailsSize: detailsSize.split('\n').filter(Boolean),
             sizeStocks,
             mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[],
+            isBestProduct
         });
 
         if (!validationResult.success) {
@@ -223,7 +231,7 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
 
         setIsSubmitting(true);
 
-        mutation.mutate({ title, price: isPriceValid ? price : 0, categoryId: selectedCategory, features: features.split('\n').filter(Boolean), materials: materials.split('\n').filter(Boolean), summary, detailsSize: detailsSize.split('\n').filter(Boolean), sizeStocks, mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[] }, {
+        mutation.mutate({ title, price: isPriceValid ? price : 0, categoryId: selectedCategory, features: features.split('\n').filter(Boolean), materials: materials.split('\n').filter(Boolean), summary, detailsSize: detailsSize.split('\n').filter(Boolean), sizeStocks, mediaIds: attachments.map((a) => a.mediaId).filter(Boolean) as string[], isBestProduct }, {
             onSuccess: () => {
                 titleEditor?.commands.clearContent();
                 priceEditor?.commands.clearContent();
@@ -241,27 +249,55 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
         })
     }
 
-    console.log(errors)
-
     return (
         <div className="flex flex-col gap-6 rounded-3xl bg-card p-6 shadow-md">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="flex flex-col">
-                    <label className="text-lg font-semibold mb-2">Title</label>
-                    <EditorContent
-                        editor={titleEditor}
-                        className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
-                    />
-                    {errors.title && <p className="text-red-600 text-sm mt-1">{errors.title}</p>}
-                </div>
-                <div className="flex flex-col">
-                    <label className="text-lg font-semibold mb-2">Price</label>
-                    <EditorContent
-                        editor={priceEditor}
-                        className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
-                    />
-                    {errors.price && <p className="text-red-600 text-sm mt-1">{errors.price}</p>}
-                </div>
+                <TooltipProvider>
+                    <div className="flex flex-col">
+                        <div className="flex items-center gap-3">
+                            <label className="text-lg font-semibold mb-2">Title</label>
+                            <div className="mb-2">
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right">
+                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                        <p className="text-xs">Erigo Shirt</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </div>
+                        </div>
+                        <EditorContent
+                            editor={titleEditor}
+                            className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
+                        />
+                        {errors.title && <p className="text-red-600 text-sm mt-1">{errors.title}</p>}
+                    </div>
+                </TooltipProvider>
+                <TooltipProvider>
+                    <div className="flex flex-col">
+                        <div className="flex items-center gap-3">
+                            <label className="text-lg font-semibold mb-2">Price</label>
+                            <div className="mb-2">
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                    </TooltipTrigger>
+                                    <TooltipContent side="left">
+                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                        <p className="text-xs">150000</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </div>
+                        </div>
+                        <EditorContent
+                            editor={priceEditor}
+                            className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
+                        />
+                        {errors.price && <p className="text-red-600 text-sm mt-1">{errors.price}</p>}
+                    </div>
+                </TooltipProvider>
                 <div className="flex flex-col">
                     <label className="text-lg font-semibold mb-2">Category</label>
                     <Select onValueChange={handleCategoryChange}>
@@ -278,37 +314,116 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                     </Select>
                     {errors.categoryId && <p className="text-red-600 text-sm mt-1">{errors.categoryId}</p>}
                 </div>
-                <div className="flex flex-col">
-                    <label className="text-lg font-semibold mb-2">Features</label>
-                    <EditorContent
-                        editor={featuresEditor}
-                        className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
+                <TooltipProvider>
+                    <div className="flex flex-col">
+                        <div className="flex items-center gap-3">
+                            <label className="text-lg font-semibold mb-2">Features</label>
+                            <div className="mb-2">
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                    </TooltipTrigger>
+                                    <TooltipContent side="left">
+                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                        <p className="text-xs">Mudah disetrika</p>
+                                        <p className="text-xs">Bahan halus</p>
+                                        <p className="text-xs italic text-red-500">Selalu gunakan pemisah enter</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </div>
+                        </div>
+                        <EditorContent
+                            editor={featuresEditor}
+                            className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
+                        />
+                        {errors.features && <p className="text-red-600 text-sm mt-1">{errors.features}</p>}
+                    </div>
+                </TooltipProvider>
+                <TooltipProvider>
+                    <div className="flex flex-col">
+                        <div className="flex items-center gap-3">
+                            <label className="text-lg font-semibold mb-2">Materials</label>
+                            <div className="mb-2">
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right">
+                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                        <p className="text-xs">Bahan CVC</p>
+                                        <p className="text-xs">Cotton</p>
+                                        <p className="text-xs italic text-red-500">Selalu gunakan pemisah enter</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </div>
+                        </div>
+                        <EditorContent
+                            editor={materialsEditor}
+                            className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
+                        />
+                        {errors.materials && <p className="text-red-600 text-sm mt-1">{errors.materials}</p>}
+                    </div>
+                </TooltipProvider>
+                <TooltipProvider>
+                    <div className="flex flex-col">
+                        <div className="flex items-center gap-3">
+                            <label className="text-lg font-semibold mb-2">Summary</label>
+                            <div className="mb-2">
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                    </TooltipTrigger>
+                                    <TooltipContent side="left">
+                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                        <p className="text-xs">produk unggulan dari toko kami</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </div>
+                        </div>
+                        <EditorContent
+                            editor={summaryEditor}
+                            className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
+                        />
+                        {errors.summary && <p className="text-red-600 text-sm mt-1">{errors.summary}</p>}
+                    </div>
+                </TooltipProvider>
+                <TooltipProvider>
+                    <div className="flex flex-col">
+                        <div className="flex items-center gap-3">
+                            <label className="text-lg font-semibold mb-2">Size Details</label>
+                            <div className="mb-2">
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                    </TooltipTrigger>
+                                    <TooltipContent side="right">
+                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                        <p className="text-xs">S : 12 x 54 x 65</p>
+                                        <p className="text-xs">M : 123 x 56 x 76</p>
+                                        <p className="text-xs">L : 123 x 56 x 76</p>
+                                        <p className="text-xs italic text-red-500">Selalu gunakan pemisah enter</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </div>
+                        </div>
+                        <EditorContent
+                            editor={detailsSizeEditor}
+                            className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
+                        />
+                        {errors.detailsSize && <p className="text-red-600 text-sm mt-1">{errors.detailsSize}</p>}
+                    </div>
+                </TooltipProvider>
+            </div>
+            <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                    <Checkbox
+                        id="bestProduct"
+                        checked={isBestProduct}
+                        onCheckedChange={handleBestProductChange}
                     />
-                    {errors.features && <p className="text-red-600 text-sm mt-1">{errors.features}</p>}
-                </div>
-                <div className="flex flex-col">
-                    <label className="text-lg font-semibold mb-2">Material</label>
-                    <EditorContent
-                        editor={materialsEditor}
-                        className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
-                    />
-                    {errors.materials && <p className="text-red-600 text-sm mt-1">{errors.materials}</p>}
-                </div>
-                <div className="flex flex-col">
-                    <label className="text-lg font-semibold mb-2">Summary</label>
-                    <EditorContent
-                        editor={summaryEditor}
-                        className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
-                    />
-                    {errors.summary && <p className="text-red-600 text-sm mt-1">{errors.summary}</p>}
-                </div>
-                <div className="flex flex-col">
-                    <label className="text-lg font-semibold mb-2">Size Details</label>
-                    <EditorContent
-                        editor={detailsSizeEditor}
-                        className="w-full max-h-[8rem] overflow-y-auto bg-background rounded-lg px-4 py-2 border border-muted-foreground"
-                    />
-                    {errors.detailsSize && <p className="text-red-600 text-sm mt-1">{errors.detailsSize}</p>}
+                    <label htmlFor="bestProduct" className="text-lg font-semibold">
+                        Mark as Best Product
+                    </label>
                 </div>
             </div>
             <div className="flex flex-col space-y-4">

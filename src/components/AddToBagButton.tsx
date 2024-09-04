@@ -21,19 +21,23 @@ const AddToBagButton = ({ children, onClick, disabled = false }: AddToBagButtonP
 
     async function handleClick() {
         if (!user) {
+            toast({
+                variant: "destructive",
+                description: "You need to log in to add items to your bag.",
+            });
             router.push("/login");
         } else {
-            setLoading(true); // Mulai loading
+            setLoading(true);
             try {
-                await onClick(); // Panggil onClick async function
-                toast({
-                    variant: "default",
-                    description: "Product Added to Your bag"
-                });
+                await onClick();
             } catch (error) {
+                toast({
+                    variant: "destructive",
+                    description: "Failed to add to bag. Please try again.",
+                });
                 console.error("Failed to add to bag:", error);
             } finally {
-                setLoading(false); // Selesai loading
+                setLoading(false);
             }
         }
     }
@@ -41,7 +45,7 @@ const AddToBagButton = ({ children, onClick, disabled = false }: AddToBagButtonP
     return (
         <Button
             onClick={handleClick}
-            disabled={loading || disabled} // Disable button saat loading atau jika disabled prop diberikan
+            disabled={loading} // Only disabled during loading
             className="rounded-lg bg-primary text-background text-sm w-full max-w-72"
         >
             {loading ? (

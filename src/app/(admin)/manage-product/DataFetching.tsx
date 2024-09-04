@@ -74,14 +74,14 @@ const DataFetching = ({ categoryId }: DataFetchingProps) => {
                     categoryId={categoryId}
                 />
             )}
-            {/* {selectedProduct && (
+            {selectedProduct && (
                 <EditProductDialog
-                    productContent={selectedProduct}
+                    product={selectedProduct}
                     open={isEditDialogOpen}
                     onClose={handleCloseEditDialog}
                     categoryId={categoryId}
                 />
-            )} */}
+            )}
         </>
     )
 }

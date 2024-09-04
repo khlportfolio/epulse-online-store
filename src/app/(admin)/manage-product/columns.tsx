@@ -37,13 +37,13 @@ export const columns = (
             header: "Actions",
             cell: ({ row }) => (
                 <div className="flex space-x-2">
-                    {/* <button
+                    <button
                         onClick={() => handleEdit(row.original)}
                         className="text-blue-600 hover:text-blue-800"
                         aria-label="Edit"
                     >
                         <Edit size={16} />
-                    </button> */}
+                    </button>
                     <button
                         onClick={() => handleDelete(row.original)}
                         className="text-red-600 hover:text-red-800"

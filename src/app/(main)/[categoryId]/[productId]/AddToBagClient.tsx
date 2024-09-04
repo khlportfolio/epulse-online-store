@@ -50,10 +50,26 @@ const AddToBagClient: React.FC<AddToBagClientProps> = ({ productId, sizes, initi
     };
 
     const handleAddToBag = async () => {
-        if (!userId || !selectedSizeId || !isSizeInStock) {
+        if (!userId) {
             toast({
                 variant: "destructive",
-                description: "Please select a valid size and ensure you are logged in."
+                description: "Silahkan anda login terlebih dahulu.",
+            });
+            return;
+        }
+
+        if (!selectedSizeId) {
+            toast({
+                variant: "destructive",
+                description: "Silahkan pilih ukuran produk yang anda pilih.",
+            });
+            return;
+        }
+
+        if (!isSizeInStock) {
+            toast({
+                variant: "destructive",
+                description: "Stock yang anda pilih habis.",
             });
             return;
         }
@@ -69,12 +85,12 @@ const AddToBagClient: React.FC<AddToBagClientProps> = ({ productId, sizes, initi
             });
             toast({
                 variant: "default",
-                description: "Added to Bag"
+                description: "Added to Bag",
             });
         } catch (error) {
             toast({
                 variant: "destructive",
-                description: "Failed to add to bag. Please try again."
+                description: "Failed to add to bag. Please try again.",
             });
         } finally {
             setLoading(false);
@@ -95,6 +111,7 @@ const AddToBagClient: React.FC<AddToBagClientProps> = ({ productId, sizes, initi
                                 onClick={() => handleSizeSelect(size.id)}
                                 selected={selectedSizeId === size.id}
                                 className={`relative px-4 py-2 border rounded-md cursor-pointer ${selectedSizeId === size.id ? 'bg-primary text-white' : 'bg-background text-primary'}`}
+
                             >
                                 {size.name}
                             </SizeButton>
@@ -125,7 +142,7 @@ const AddToBagClient: React.FC<AddToBagClientProps> = ({ productId, sizes, initi
             <div className="flex flex-wrap gap-4 max-sm:justify-center">
                 <AddToBagButton
                     onClick={handleAddToBag}
-                    disabled={loading || !userId || !selectedSizeId || !isSizeInStock}
+                    disabled={loading}
                 >
                     {loading ? 'Adding...' : 'ADD TO BAG'}
                 </AddToBagButton>

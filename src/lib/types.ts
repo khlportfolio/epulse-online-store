@@ -28,16 +28,6 @@ export interface SizeContentsPage {
 export function getProductDataInclude(loggedInUserId?: string) {
   return {
     attachments: true,
-    // ...(loggedInUserId && {
-    //   bookmarks: {
-    //     where: {
-    //       userId: loggedInUserId,
-    //     },
-    //     select: {
-    //       userId: true,
-    //     },
-    //   },
-    // }),
     bookmarks: {
       where: {
         userId: loggedInUserId,

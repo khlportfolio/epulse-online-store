@@ -4,7 +4,7 @@ interface PageProps {
     params: { categoryId: string }
 }
 
-const Page = ({ params: { categoryId } }: PageProps) => {
+const Page = async ({ params: { categoryId } }: PageProps) => {
     return (
         <Products categoryId={categoryId} />
     )

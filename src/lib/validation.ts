@@ -65,6 +65,7 @@ export const createProductSchema = z.object({
   detailsSize: z.array(z.string()),
   sizeStocks: z.array(sizeStockSchema),
   mediaIds: z.array(z.string()).max(5, 'Cannot have more than 5 attachments'),
+  isBestProduct: z.boolean(),
 })
 
 export const updateProductSchema = z.object({
@@ -72,8 +73,11 @@ export const updateProductSchema = z.object({
   title: requiredString,
   price: positiveInt,
   categoryId: requiredString,
-  features: requiredString,
-  materials: requiredString,
+  features: z.array(z.string()),
+  materials: z.array(z.string()),
   summary: requiredString,
-  detailsSize: requiredString,
+  detailsSize: z.array(z.string()),
+  sizeStocks: z.array(sizeStockSchema),
+  mediaIds: z.array(z.string()).optional(),
+  isBestProduct: z.boolean(),
 })
