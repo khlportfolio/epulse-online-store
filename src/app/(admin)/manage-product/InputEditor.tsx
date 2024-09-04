@@ -17,6 +17,11 @@ import Image from "next/image";
 import { createProductSchema } from "@/lib/validation";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 
 interface InputEditorProps {
     onSubmitSuccess: () => void;
@@ -257,15 +262,28 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                         <div className="flex items-center gap-3">
                             <label className="text-lg font-semibold mb-2">Title</label>
                             <div className="mb-2">
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
-                                    </TooltipTrigger>
-                                    <TooltipContent side="right">
-                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
-                                        <p className="text-xs">Erigo Shirt</p>
-                                    </TooltipContent>
-                                </Tooltip>
+                                <div className="hidden lg:block">
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </TooltipTrigger>
+                                        <TooltipContent side="right">
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">Erigo Shirt</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </div>
+                                <div className="block lg:hidden">
+                                    <Popover>
+                                        <PopoverTrigger>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </PopoverTrigger>
+                                        <PopoverContent>
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">Erigo Shirt</p>
+                                        </PopoverContent>
+                                    </Popover>
+                                </div>
                             </div>
                         </div>
                         <EditorContent
@@ -280,15 +298,28 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                         <div className="flex items-center gap-3">
                             <label className="text-lg font-semibold mb-2">Price</label>
                             <div className="mb-2">
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
-                                    </TooltipTrigger>
-                                    <TooltipContent side="left">
-                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
-                                        <p className="text-xs">150000</p>
-                                    </TooltipContent>
-                                </Tooltip>
+                                <div className="hidden lg:block">
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </TooltipTrigger>
+                                        <TooltipContent side="right">
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">Erigo Shirt</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </div>
+                                <div className="block lg:hidden">
+                                    <Popover>
+                                        <PopoverTrigger>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </PopoverTrigger>
+                                        <PopoverContent>
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">150000</p>
+                                        </PopoverContent>
+                                    </Popover>
+                                </div>
                             </div>
                         </div>
                         <EditorContent
@@ -319,17 +350,30 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                         <div className="flex items-center gap-3">
                             <label className="text-lg font-semibold mb-2">Features</label>
                             <div className="mb-2">
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
-                                    </TooltipTrigger>
-                                    <TooltipContent side="left">
-                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
-                                        <p className="text-xs">Mudah disetrika</p>
-                                        <p className="text-xs">Bahan halus</p>
-                                        <p className="text-xs italic text-red-500">Selalu gunakan pemisah enter</p>
-                                    </TooltipContent>
-                                </Tooltip>
+                                <div className="hidden lg:block">
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </TooltipTrigger>
+                                        <TooltipContent side="right">
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">Erigo Shirt</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </div>
+                                <div className="block lg:hidden">
+                                    <Popover>
+                                        <PopoverTrigger>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </PopoverTrigger>
+                                        <PopoverContent>
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">Mudah disetrika</p>
+                                            <p className="text-xs">Bahan halus</p>
+                                            <p className="text-xs italic text-red-500">Selalu gunakan pemisah enter</p>
+                                        </PopoverContent>
+                                    </Popover>
+                                </div>
                             </div>
                         </div>
                         <EditorContent
@@ -344,17 +388,30 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                         <div className="flex items-center gap-3">
                             <label className="text-lg font-semibold mb-2">Materials</label>
                             <div className="mb-2">
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
-                                    </TooltipTrigger>
-                                    <TooltipContent side="right">
-                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
-                                        <p className="text-xs">Bahan CVC</p>
-                                        <p className="text-xs">Cotton</p>
-                                        <p className="text-xs italic text-red-500">Selalu gunakan pemisah enter</p>
-                                    </TooltipContent>
-                                </Tooltip>
+                                <div className="hidden lg:block">
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </TooltipTrigger>
+                                        <TooltipContent side="right">
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">Erigo Shirt</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </div>
+                                <div className="block lg:hidden">
+                                    <Popover>
+                                        <PopoverTrigger>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </PopoverTrigger>
+                                        <PopoverContent>
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">Bahan CVC</p>
+                                            <p className="text-xs">Cotton</p>
+                                            <p className="text-xs italic text-red-500">Selalu gunakan pemisah enter</p>
+                                        </PopoverContent>
+                                    </Popover>
+                                </div>
                             </div>
                         </div>
                         <EditorContent
@@ -369,15 +426,28 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                         <div className="flex items-center gap-3">
                             <label className="text-lg font-semibold mb-2">Summary</label>
                             <div className="mb-2">
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
-                                    </TooltipTrigger>
-                                    <TooltipContent side="left">
-                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
-                                        <p className="text-xs">produk unggulan dari toko kami</p>
-                                    </TooltipContent>
-                                </Tooltip>
+                                <div className="hidden lg:block">
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </TooltipTrigger>
+                                        <TooltipContent side="right">
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">Erigo Shirt</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </div>
+                                <div className="block lg:hidden">
+                                    <Popover>
+                                        <PopoverTrigger>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </PopoverTrigger>
+                                        <PopoverContent>
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">produk unggulan dari toko kami</p>
+                                        </PopoverContent>
+                                    </Popover>
+                                </div>
                             </div>
                         </div>
                         <EditorContent
@@ -392,18 +462,31 @@ const InputEditor = ({ onSubmitSuccess, categoryId }: InputEditorProps) => {
                         <div className="flex items-center gap-3">
                             <label className="text-lg font-semibold mb-2">Size Details</label>
                             <div className="mb-2">
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
-                                    </TooltipTrigger>
-                                    <TooltipContent side="right">
-                                        <p className="text-xs font-semibold">Contoh input yang benar :</p>
-                                        <p className="text-xs">S : 12 x 54 x 65</p>
-                                        <p className="text-xs">M : 123 x 56 x 76</p>
-                                        <p className="text-xs">L : 123 x 56 x 76</p>
-                                        <p className="text-xs italic text-red-500">Selalu gunakan pemisah enter</p>
-                                    </TooltipContent>
-                                </Tooltip>
+                                <div className="hidden lg:block">
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </TooltipTrigger>
+                                        <TooltipContent side="right">
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">Erigo Shirt</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </div>
+                                <div className="block lg:hidden">
+                                    <Popover>
+                                        <PopoverTrigger>
+                                            <Info className="text-muted-foreground hover:text-primary cursor-pointer" size={20} />
+                                        </PopoverTrigger>
+                                        <PopoverContent>
+                                            <p className="text-xs font-semibold">Contoh input yang benar :</p>
+                                            <p className="text-xs">S : 12 x 54 x 65</p>
+                                            <p className="text-xs">M : 123 x 56 x 76</p>
+                                            <p className="text-xs">L : 123 x 56 x 76</p>
+                                            <p className="text-xs italic text-red-500">Selalu gunakan pemisah enter</p>
+                                        </PopoverContent>
+                                    </Popover>
+                                </div>
                             </div>
                         </div>
                         <EditorContent
