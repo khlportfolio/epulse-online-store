@@ -4,14 +4,14 @@ const SocialMedia = () => {
     return (
         <section className="bg-background px-5 sm:px-14">
             <h2 className="text-muted-foreground text-xl md:text-2xl lg:text-4xl font-semibold">
-                Touch Us on Social Media
+                Hubungi kami lewat sosial media
             </h2>
             <hr className="border-muted-foreground border-t-2 w-36 mt-4" />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10">
-                <SocialMediaCard src={require('../../assets/icon-instagram.png').default} href="/" title="Discover Style Daily on Instagram" description="Follow us on Instagram for a daily dose of fashion inspiration, exclusive sneak peeks, and the latest trends. Get closer to our brand and be the first to see what’s new." />
-                <SocialMediaCard src={require('../../assets/icon-facebook.png').default} href="/" title="Join Our Community on Facebook" description="Like our Facebook page to stay updated with our newest collections, special promotions, and events. Engage with us and share your style stories with a community that loves fashion as much as you do." />
-                <SocialMediaCard src={require('../../assets/icon-twitter.png').default} href="/" title="Catch the Latest Buzz on Twitter" description="Follow us on Twitter for real-time updates, quick style tips, and engaging conversations. Don’t miss out on exclusive announcements and flash sales—stay in the loop with every tweet." />
-                <SocialMediaCard src={require('../../assets/icon-tiktok.png').default} href="/" title="See Fashion in Motion on TikTok" description="Follow us on TikTok for fun, dynamic content that brings our styles to life. From fashion tips to behind-the-scenes moments, discover our collection in a whole new way." />
+                <SocialMediaCard src={require('../../assets/icon-instagram.png').default} href="/" title="Temukan inspirasi lewat instagram" description="Ikuti kami di Instagram untuk inspirasi fashion harian, bocoran eksklusif, dan tren terbaru. Lebih dekat dengan brand kami dan jadilah yang pertama melihat apa yang baru." />
+                <SocialMediaCard src={require('../../assets/icon-facebook.png').default} href="/" title="Gabung komunitas kami" description="Like halaman Facebook kami untuk mendapatkan pembaruan tentang koleksi terbaru, promosi spesial, dan acara menarik. Terlibatlah dengan kami dan bagikan kisah gaya Anda dengan komunitas yang sama-sama mencintai fashion seperti Anda." />
+                <SocialMediaCard src={require('../../assets/icon-twitter.png').default} href="/" title="Dapatkan update terbaru lewat twitter" description="Follow kami di Twitter untuk pembaruan real-time, tips gaya cepat, dan percakapan seru. Jangan lewatkan pengumuman eksklusif dan penjualan kilat—tetap terhubung dengan setiap tweet." />
+                <SocialMediaCard src={require('../../assets/icon-tiktok.png').default} href="/" title="Liat fashion terbaru lewat tiktok kami" description="Follow kami di Twitter untuk pembaruan real-time, tips gaya cepat, dan percakapan seru. Jangan lewatkan pengumuman eksklusif dan penjualan kilat—tetap terhubung dengan setiap tweet." />
             </div>
         </section>
     )

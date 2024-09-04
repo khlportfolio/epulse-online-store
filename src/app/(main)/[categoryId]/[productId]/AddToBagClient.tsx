@@ -126,7 +126,7 @@ const AddToBagClient: React.FC<AddToBagClientProps> = ({ productId, sizes, initi
                 </div>
                 <div className="mt-4">
                     <label htmlFor="quantity" className="text-muted-foreground text-lg font-semibold">
-                        Quantity
+                        Jumlah
                     </label>
                     <input
                         id="quantity"

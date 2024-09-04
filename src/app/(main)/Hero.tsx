@@ -16,10 +16,10 @@ const Hero = () => {
             </div>
             <div className="absolute z-10 text-center px-5 md:mt-40">
                 <h1 className="text-background text-2xl md:text-4xl lg:text-5xl font-bold leading-tight">
-                    Discover Your Perfect Fit
+                    Temukan Pakaian Terbaik Anda
                 </h1>
                 <p className="text-background text-sm md:text-base lg:text-xl mt-4 max-w-2xl mx-auto font-medium">
-                    Explore our curated collection of stylish and comfortable apparel, perfect for every occasion.
+                    Temukan pilihan pakaian kami yang dirancang dengan gaya dan kenyamanan, ideal untuk semua acara.
                 </p>
             </div>
         </section>

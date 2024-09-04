@@ -71,7 +71,7 @@ const CartItemsList = ({ cartItems: initialCartItems, totalPrice: initialTotalPr
             </div>
             <div className="flex justify-end mt-8">
                 <div className="bg-white p-4 rounded-md shadow-md w-full md:w-1/2">
-                    <h2 className="text-xl font-semibold text-primary">Order Summary</h2>
+                    <h2 className="text-xl font-semibold text-primary">Ringkasan pemesanan</h2>
                     <div className="flex justify-between mt-4">
                         <span className="text-lg">Total</span>
                         <span className="text-lg font-bold">{formatCurrency(totalPrice)}</span>

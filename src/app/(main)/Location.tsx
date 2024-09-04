@@ -13,10 +13,10 @@ const Location = () => {
                 </div>
 
                 <div className="flex-1 min-w-[300px] p-5 ">
-                    <h2 className="text-muted-foreground text-2xl font-semibold mb-4">Visit Us in the Heart of the City</h2>
+                    <h2 className="text-muted-foreground md:text-2xl lg:text-4xl font-semibold mb-4">Kunjungi Toko Kami</h2>
                     <hr className="border-muted-foreground border-t-2 w-36 my-3" />
                     <p className="text-muted-foreground text-base">
-                        Conveniently located in the bustling city center, our store is the perfect destination to explore our latest collections in person. Come and experience the quality and style of [Your Brand Name] firsthand—our friendly team is here to assist you with all your fashion needs.
+                        Terletak strategis di jantung kota yang ramai, toko kami menjadi destinasi ideal bagi Anda yang ingin mengeksplorasi koleksi pakaian dengan kualitas premium. Dengan suasana yang nyaman dan pelayanan yang ramah, kami berkomitmen untuk memberikan pengalaman berbelanja yang menyenangkan dan memuaskan. Tim kami yang profesional siap membantu Anda menemukan pilihan fashion terbaik yang sesuai dengan gaya dan kebutuhan Anda. Kunjungi toko kami dan temukan sentuhan elegan dari koleksi eksklusif kami, dirancang untuk membuat Anda tampil memukau di setiap kesempatan.
                     </p>
                 </div>
             </div>
