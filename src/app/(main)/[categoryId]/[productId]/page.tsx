@@ -23,6 +23,9 @@ const getProduct = cache(async (productId: string) => {
             attachments: true,
             bookmarks: true,
             sizeStocks: {
+                orderBy: {
+                    sizeId: "desc"
+                },
                 include: {
                     size: true,
                 },
