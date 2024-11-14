@@ -1,5 +1,5 @@
 import HeroImage from "@/assets/logo-image.jpg"
-import CoverImage from "@/assets/cover.png"
+import CoverImage from "@/assets/covers.png"
 import Image from "next/image"
 
 const Hero = () => {
