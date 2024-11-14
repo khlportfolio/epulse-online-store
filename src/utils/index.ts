@@ -41,7 +41,7 @@ export const FooterLinks = [
   [
     {
       title: 'Store Location',
-      route: '/',
+      route: 'https://maps.app.goo.gl/mvB76H1AttSFviUk7',
     },
     {
       title: 'Products',
@@ -55,7 +55,7 @@ export const FooterLinks = [
   [
     {
       title: 'Contact Us',
-      route: '/',
+      route: 'https://wa.me/6282242064117',
     },
     {
       title: 'Frequently Asked Question',
@@ -68,11 +68,11 @@ export const FooterLinks = [
   ],
   [
     {
-      title: 'Email: xyz@gmail.com',
+      title: 'Email: epuiseidn@gmail.com',
       route: '/',
     },
     {
-      title: 'Phone: 081928187676',
+      title: 'Phone: 082242064117',
       route: '/',
     },
     {

@@ -1,4 +1,5 @@
 import HeroImage from "@/assets/logo-image.jpg"
+import CoverImage from "@/assets/cover.png"
 import Image from "next/image"
 
 const Hero = () => {
@@ -6,7 +7,7 @@ const Hero = () => {
         <section className="relative bg-background flex flex-col items-center justify-center">
             <div className="w-full">
                 <Image
-                    src={HeroImage}
+                    src={CoverImage}
                     alt="Hero Image"
                     width={1600}
                     height={900}

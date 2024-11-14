@@ -49,7 +49,7 @@ const CartItemsList = ({ cartItems: initialCartItems, totalPrice: initialTotalPr
 
             // Setelah berhasil, format pesan dan buka WhatsApp
             const message = formatWhatsAppMessage(username!, cartItems, totalPrice);
-            const phoneNumber = "6283838732975";
+            const phoneNumber = "6282242064117";
             const url = `https://wa.me/${phoneNumber}?text=${message}`;
 
             window.open(url, "_blank");

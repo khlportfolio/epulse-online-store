@@ -41,7 +41,7 @@ const Footer = () => {
                 <div className="flex flex-col gap-2 -ms-9 max-sm:ms-0">
                     <h3 className="text-base text-primary font-semibold">Socials</h3>
                     <div className="flex items-center gap-x-3">
-                        <Link href="">
+                        <Link href="https://instagram.com/epuiseid_">
                             <Image
                                 src={require('../../assets/icon-instagram.png').default}
                                 alt="Footer icon"

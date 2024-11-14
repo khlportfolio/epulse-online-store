@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import { LatLngExpression } from 'leaflet';
 import { useEffect, useRef } from 'react';
 
-const center: LatLngExpression = [-7.5564, 110.8271]; // Koordinat Surakarta
+const center: LatLngExpression = [-7.5378857, 110.7478227]; // Koordinat Surakarta
 const zoom = 13;
 
 const MapComponent = () => {
