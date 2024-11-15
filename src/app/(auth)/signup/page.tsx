@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import signUpImage from "@/assets/signup-image.jpg"
+import signUpImage from "@/assets/signup.jpg"
 import Image from "next/image"
 import Link from "next/link"
 import SignUpForm from "./SignUpForm"
